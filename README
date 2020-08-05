@@ -1,0 +1,4 @@
+Scripts which pull data from I2C components
+requires corresponding ada-fruit libraries to run 
+logs each experiment 
+outputs numbered data files
