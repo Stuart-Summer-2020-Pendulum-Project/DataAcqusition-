@@ -10,6 +10,7 @@ from Adafruit import ADS1x15
 import os
 import matplotlib.pyplot as plt
 import numpy as np
+import sys
 
 # write a function that will iterate over output files to avoid overwriting data
 def checkdir(f):
@@ -63,7 +64,7 @@ print("Data Acquisition has begun at: ",  time.asctime())
 
 # log experiment
 log = open("LOG.txt", 'a+')
-log.write('\n'+ out + ',  ' + time.asctime() + ', SPS:' +  SPS + ', notes:' + notes)
+log.write('\n'+ out + ',  ' + time.asctime() + ', SPS:' +  SPS + ', notes: ' + notes)
 log.close()
 
 # Acquire data, write to output file
