@@ -6,6 +6,7 @@ import adafruit_fxos8700 as ada_fxos
 import adafruit_fxas21002c as ada_fxas
 import time
 import os
+import sys
 
 # write a function that will iterate over output files to avoid overwriting data
 def checkdir(f):
@@ -32,16 +33,29 @@ i2c = busio.I2C(board.SCL, board.SDA)
 fxos = ada_fxos.FXOS8700(i2c)
 fxas = ada_fxas.FXAS21002C(i2c)
 
-SPS = input("\nInput how many samples per second you watn to take: ")
-notes = input("Enter any short notes you would like to include in the experiment log: ")
-#SPS = 200
+NARGS = 3 # arg 1 = scropt, arg 2= SPS, arg 3 = notes
+args = list(sys.argv)
+if len(args) != NARGS:
+	print("Incorrect number of arguements given. SPS and notes for exp. log should be arguements 1 and 2. exiting...")
+	sys.exit(0)
+else:
+	pass
+try:
+	float(args[1])
+except ValueError:
+	print("Command line arguement 1 must be numerical value to dictate number of samples per second. Arguement rejected. exiting...")
+	sys.exit(0)
+
+SPS = args[1]
+VRANGE = 4096
 sinterval = 1/float(SPS)
 ACQTIME = 1
+notes = args[2]
 
 # log experiment
 # row 2 will be numerical time so that i can calibrate with run on second pi
 log = open("9DOF_LOG.txt", 'a+')
-log.write('\n'+ out + ',  ' + str(time.time()) + ', ' + time.asctime() + ', SPS:' +  SPS + ', notes:' + notes)
+log.write('\n'+ out + ',  ' + str(time.time()) + ', ' + time.asctime() + ', SPS:' +  SPS + ', notes: ' + notes)
 log.close()
 
 # Acquire data, write to output file
