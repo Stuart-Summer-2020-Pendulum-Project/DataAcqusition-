@@ -31,13 +31,25 @@ out = checkdir(f)
 print("This experiment will write data to ", out)
 data = open(out, 'w+')
 
-# get experimental parameters from user
-SPS = input("Enter samples per second: ")
-#SPS = 200 
+# get experimental paramaters
+NARGS = 3 # arg 1 = scropt, arg 2= SPS, arg 3 = notes
+args = list(sys.argv)
+if len(args) != NARGS:
+	print("Incorrect number of arguements given. SPS and notes for exp. log should be arguements 1 and 2. exiting...")
+	sys.exit(0)
+else:
+	pass
+try:
+	float(args[1])
+except ValueError:
+	print("Command line arguement 1 must be numerical value to dictate number of samples per second. Arguement rejected. exiting...")
+	sys.exit(0)
+
+SPS = args[1]
+VRANGE = 4096
 sinterval = 1/float(SPS)
 ACQTIME = 1
-notes = input ("Enter any short notes you would like to include in experiment log: ")
-
+notes = args[2]
 i2c = busio.I2C(board.SCL, board.SDA)
 
 sensor = vl.VL6180X(i2c)
