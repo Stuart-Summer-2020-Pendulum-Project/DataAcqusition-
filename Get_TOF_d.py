@@ -10,6 +10,7 @@ import busio
 import board
 import adafruit_vl6180x as vl
 import os 
+import sys
 
 # write a function that will iterate over output files to avoid overwriting data
 def checkdir(f):
@@ -56,7 +57,7 @@ sensor = vl.VL6180X(i2c)
 
 # log experiment
 log = open("TOF_LOG.txt", 'a+')
-log.write('\n'+ out + ',  ' + str(time.time()) + ', ' + time.asctime() + ', SPS:' +  SPS + ', notes:' + notes)
+log.write('\n'+ out + ',  ' + str(time.time()) + ', ' + time.asctime() + ', SPS:' +  SPS + ', notes: ' + notes)
 log.close()
 
 print("Data acquisition beggining... ")
