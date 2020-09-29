@@ -63,7 +63,7 @@ t0 = time.perf_counter()
 print("Data Acquisition has begun at: ",  time.asctime())
 
 # log experiment
-log = open("LOG.txt", 'a+')
+log = open("LightIntensity_LOG.txt", 'a+')
 log.write('\n'+ out + ',  ' + time.asctime() + ', SPS:' +  SPS + ', notes: ' + notes)
 log.close()
 
