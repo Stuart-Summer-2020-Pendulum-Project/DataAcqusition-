@@ -64,7 +64,7 @@ print("Data Acquisition has begun at: ",  time.asctime())
 
 # log experiment
 log = open("LightIntensity_LOG.txt", 'a+')
-log.write('\n'+ out + ',  ' + time.asctime() + ', SPS:' +  SPS + ', notes: ' + notes)
+log.write('\n'+ out + ',  ' + str(time.time()) +  time.asctime() + ', SPS:' +  SPS + ', notes: ' + notes)
 log.close()
 
 # Acquire data, write to output file
